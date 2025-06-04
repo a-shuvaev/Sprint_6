@@ -1,4 +1,3 @@
-from pages.base_page import BasePage
 from pages.order_page import OrderPage
 from data.order import ORDER_DATA
 import allure
@@ -23,10 +22,7 @@ class TestOrder:
         
         order_page.fill_start_date(test_data['start_date'])
         order_page.select_rent_period(test_data['rent_period'])
-        if test_data['color'] == 'black':
-            order_page.select_color_black()
-        elif test_data['color'] == 'grey':
-            order_page.select_color_grey()
+        order_page.select_color(test_data['color'])
             
         order_page.fill_comment(test_data['comment'])
         
@@ -48,19 +44,15 @@ class TestOrder:
         order_page.fill_address(test_data['address'])
         order_page.select_metro_station(test_data['metro_station'])
         order_page.fill_phone_number(test_data['phone_number'])
-
+        
         order_page.click_next_button()
-
+        
         order_page.fill_start_date(test_data['start_date'])
         order_page.select_rent_period(test_data['rent_period'])
-
-        if test_data['color'] == 'black':
-            order_page.select_color_black()
-        elif test_data['color'] == 'grey':
-            order_page.select_color_grey()
-
+        order_page.select_color(test_data['color'])
+            
         order_page.fill_comment(test_data['comment'])
-
+        
         order_page.click_order_button()
         order_page.click_yes_button()
 

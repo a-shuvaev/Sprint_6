@@ -3,10 +3,6 @@ from selenium.webdriver.common.by import By
 class MainPageLocators:
     
     LOGO_YANDEX = (By.CLASS_NAME, "Header_LogoYandex__3TSOI")
-    LOGO_SCOOTER = (By.CLASS_NAME, "Header_LogoScooter__3lsAR")
-    
-    BUTTON_ORDER_HEADER = (By.CSS_SELECTOR, "div.Header_Nav__AGCXC button.Button_Button__ra12g")
-    BUTTON_ORDER_BOTTOM = (By.XPATH, "//div[contains(@class, 'Home_FinishButton')]//button[contains(@class, 'Button_Button')]")
     
     FAQ_MENU = (By.XPATH, "//div[contains(@class, 'Home_FourPart__1uthg')]")
     

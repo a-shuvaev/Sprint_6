@@ -1,6 +1,4 @@
 from locators.order_page_locators import OrderPageLocators
-from locators.main_page_locators import MainPageLocators
-from selenium.webdriver.common.by import By
 from selenium.webdriver.support import expected_conditions as EC
 from pages.base_page import BasePage
 import allure
@@ -9,12 +7,12 @@ class OrderPage(BasePage):
     
     @allure.step("Нажатие на кнопку 'Заказать' в заголовке страницы")
     def click_order_button_top(self):
-        self.find_element(MainPageLocators.BUTTON_ORDER_HEADER).click()
+        self.find_element(OrderPageLocators.BUTTON_ORDER_HEADER).click()
     
     @allure.step("Нажатие на кнопку 'Заказать' внизу страницы")
     def click_order_button_bottom(self):
-        self.scroll_to_element(MainPageLocators.BUTTON_ORDER_BOTTOM)
-        self.wait.until(EC.element_to_be_clickable(MainPageLocators.BUTTON_ORDER_BOTTOM)).click()
+        self.scroll_to_element(OrderPageLocators.BUTTON_ORDER_BOTTOM)
+        self.wait.until(EC.element_to_be_clickable(OrderPageLocators.BUTTON_ORDER_BOTTOM)).click()
     
     @allure.step("Заполнить поле 'Имя'")
     def fill_first_name(self, first_name):
@@ -33,7 +31,7 @@ class OrderPage(BasePage):
         field_metro = self.find_element(OrderPageLocators.SELECT_METRO_STATION)
         field_metro.click()
         field_metro.send_keys(metro_station)
-        self.find_element((By.XPATH, f"//div[@class='select-search__select']//div[text()='{metro_station}']")).click()
+        self.find_element(OrderPageLocators.select_metro_station_option(metro_station)).click()
         
     @allure.step("Заполнить поле 'Телефон'")
     def fill_phone_number(self, phone_number):
@@ -46,7 +44,7 @@ class OrderPage(BasePage):
     @allure.step("Заполнить поле 'Дата начала аренды'")
     def fill_start_date(self, start_date):
         self.find_element(OrderPageLocators.INPUT_START_DATE).send_keys(start_date)
-        self.find_element((By.XPATH, "//div[contains(@class, 'react-datepicker__day--selected')]")).click()
+        self.find_element(OrderPageLocators.SELECT_START_DATE).click()
     
     @allure.step("Выбрать период аренды")
     def select_rent_period(self, rent_period):
@@ -59,28 +57,16 @@ class OrderPage(BasePage):
                 break
         
     @allure.step("Выбрать цвет самоката: черный")
-    def select_color_black(self):
-        self.find_element(OrderPageLocators.CHECKBOX_COLOR_BLACK).click()
-        
-    @allure.step("Выбрать цвет самоката: серый")
-    def select_color_grey(self):
-        self.find_element(OrderPageLocators.CHECKBOX_COLOR_GREY).click()
+    def select_color(self, color):
+        self.find_element(OrderPageLocators.select_color_checkbox(color)).click()
     
     @allure.step("Заполнить поле 'Комментарий для курьера'")
     def fill_comment(self, comment):
         self.find_element(OrderPageLocators.INPUT_COMMENT).send_keys(comment)
-        
-    @allure.step("Нажать кнопку 'Назад'")
-    def click_back_button(self):
-        self.find_element(OrderPageLocators.BUTTON_BACK).click()
     
     @allure.step("Нажать кнопку 'Заказать'")
     def click_order_button(self):
         self.find_element(OrderPageLocators.BUTTON_ORDER).click()
-    
-    @allure.step("Нажать кнопку 'Нет' в окне подтверждения заказа")
-    def click_no_button(self):
-        self.find_element(OrderPageLocators.BUTTON_NO).click()
     
     @allure.step("Нажать кнопку 'Да' в окне подтверждения заказа")
     def click_yes_button(self):
@@ -93,6 +79,6 @@ class OrderPage(BasePage):
         
     @allure.step("Нажать на логотип 'Самокат' в заголовке страницы")
     def click_scooter_logo(self):
-        self.find_element(MainPageLocators.LOGO_SCOOTER).click()
+        self.find_element(OrderPageLocators.LOGO_SCOOTER).click()
     
 
